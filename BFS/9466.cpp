@@ -14,11 +14,11 @@ void DFS(int v){
     if(visited[next] == 0)
         DFS(next);
     else if(visited[next] == 1){
-        int cur = next;
+        int cur = next; //다음
         do {
             cnt++;
-            cur = A[cur];
-        } while(cur != next);
+            cur = A[cur]; //다다음
+        } while(cur != next); //사이클 한바퀴 돌면서 사이클에 속한 노드 개수 구하기
     }
 
     visited[v] = 2;
@@ -29,11 +29,14 @@ void DFS(int v){
 int main() {
 	int T;
 	cin>>T;
+	
+	visited.resize(n+1,0);
 
 	for(int i=0;i<T;i++){
 		cin>>n;
 		A.resize(n+1);
-		visited.resize(n+1,0);
+		visited.assign(n+1,0);
+		
 		cnt = 0;
 		for(int j=1;j<=n;j++){
 			cin>>A[j];
@@ -43,7 +46,9 @@ int main() {
 			if(visited[j]==0) {
 				DFS(j);
 			}
-		}cout<<n-cnt;
+		}
+		
+		cout<<n-cnt<<"\n";
 	}
 
 
